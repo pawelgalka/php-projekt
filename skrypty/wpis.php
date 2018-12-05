@@ -47,11 +47,16 @@ foreach ($cur as $current_post){
 }
 $wpis = "../blogi/".$blog_name."/".substr($_POST["data"],0,4).substr($_POST["data"],5,2).substr($_POST["data"],8,2).substr($_POST["time"],0,2).substr($_POST["time"],3,2).substr(date("H:i:s"),-2).substr(strval(100+$index),-2);
 $fp = fopen($wpis,"w+");
-flock($fp, LOCK_EX);
-chmod($wpis,0777);
-$data = $_POST["username"]."\n".$_POST["data"]."\n".$_POST["time"]."\n".$_POST["post"]."\n";
-fwrite($fp, $data);
-flock($fp, LOCK_UN);
+if(flock($fp, LOCK_EX)){
+    chmod($wpis,0777);
+    $data = $_POST["username"]."\n".$_POST["data"]."\n".$_POST["time"]."\n".$_POST["post"]."\n";
+    fwrite($fp, $data);
+    flock($fp, LOCK_UN);
+}
+else{
+    echo "Race condition error";
+    exit(-1);
+}
 fclose($fp);
 
 $count = 1;

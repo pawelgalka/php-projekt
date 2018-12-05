@@ -12,6 +12,7 @@
 
 if(!file_exists("../blogi/".$_GET["name"])){
     $sem = sem_get(2);
+    sem_acquire($sem);
     mkdir("../blogi/".$_GET["name"], 0777, true);
     chmod("../blogi/".$_GET["name"], 0777);
     echo "Blog o nazwie ".$_GET["name"]." został utworzony";
@@ -25,11 +26,16 @@ else{
 
 $plik = "../blogi/".$_GET{"name"}."/info";
 $handle = fopen($plik,"w");
-flock($handle, LOCK_EX);
-chmod($plik, 0777);
-$data = $_GET["username"]."\n".md5($_GET["psw"])."\n".$_GET["description"]."\n";
-fwrite($handle, $data);
-flock($handle, LOCK_UN);
+if(flock($handle, LOCK_EX)){
+    chmod($plik, 0777);
+    $data = $_GET["username"]."\n".md5($_GET["psw"])."\n".$_GET["description"]."\n";
+    fwrite($handle, $data);
+    flock($handle, LOCK_UN);
+}
+else{
+    echo "Race condition error";
+    exit(-1);
+}
 fclose($handle);
 ?>
 </body>

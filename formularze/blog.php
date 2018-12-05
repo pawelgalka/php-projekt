@@ -38,11 +38,11 @@ else{
     }
     echo "Nazwa bloga: ".$nazwa."<br/>";
     $fp = fopen($path."info","r+");
-    flock($fp, LOCK_EX);
+//    flock($fp, LOCK_EX);
     echo "Login: ".fgets($fp,255)."<br/>";
     fgets($fp,255);
     echo "Opis: ".fgets($fp, 255)."<br/>";
-    flock($fp, LOCK_UN);
+//    flock($fp, LOCK_UN);
     fclose($fp);
     echo "<h2>WPISY</h2>";
     $index = 1;
@@ -69,7 +69,7 @@ function komentarze($dir,$path){
             echo "Reakcja: ".fgets($fp,255)."<br/>";
             echo "Kiedy: ".fgets($fp,255)."<br/>";
             echo "Użytkownik: ".fgets($fp,255)."<br/>";
-            echo "Treść: ".fgets($fp,1024)."<br/>";
+            echo "Treść: ".fgets($fp,1024)."<br/><br/>";
             flock($fp, LOCK_UN);
             fclose($fp);
         }
@@ -94,15 +94,12 @@ function wpisy($dir,$path, $index){
 
 function zalaczniki($dir,$path){
     echo "<h4>Załączniki:</h4>";
-//    echo $dir;
-//    echo $path;
     foreach ((new DirectoryIterator($path)) as $file){
         if (pathinfo($file)['filename'] == $dir."1") {
             echo "<a href='".$path.$dir."1.".pathinfo($file)['extension']."'> Załącznik 1 </a> </li><br/>";
         }
         if (pathinfo($file)['filename'] == $dir."2") {
             echo "<a href='".$path.$dir."2.".pathinfo($file)['extension']."'> Załącznik 2 </a> </li><br/>";
-//            echo "<a href='".$path.$dir."2'> Załącznik 2 </a> </li>";
         }
         if (pathinfo($file)['filename'] == $dir."3") {
             echo "<a href='".$path.$dir."3.".pathinfo($file)['extension']."'> Załącznik 3 </a> </li><br/>";
