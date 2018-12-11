@@ -12,7 +12,7 @@
 
 $path = $_GET['post'].".k/";
 if(!file_exists($path)){
-    $sem = sem_get(1);
+    $sem = sem_get(123456);
     sem_acquire($sem);
     mkdir($_GET['post'].".k", 0777, true);
     chmod($_GET['post'].".k", 0777);

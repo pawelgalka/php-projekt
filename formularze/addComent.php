@@ -5,11 +5,12 @@
 
 <head>
     <title>Tworzenie bloga</title>
+    <link rel="stylesheet" title="compact" href="styl.css" type="text/css" />
 </head>
 
 <body>
-<div id="pozostale_cwiczenia">
-    Menu:
+<div class="menu">
+    <p>Menu:</p>
     <ul>
         <li><a href="createBlog.php">Nowy blog</a></li>
         <li><a href="addPost.php">Nowy wpis</a></li>
@@ -17,9 +18,11 @@
     </ul>
 </div>
 
-<h1 id="title">Formularz tworzenia komentarza</h1>
-<form action="../skrypty/koment.php">
-    <input type="hidden" name="post" value=<?php echo $_GET['post']?>>
+<div id="main">
+    <h1 id="title">Formularz tworzenia komentarza</h1>
+    <div id="text">
+<form action="../skrypty/koment.php"  target="_blank">
+    <input type="hidden" name="post" value="<?php  echo $_GET['post'];?>">
     <label for="reaction"><b>Typ komentarza:</b></label><br/>
     <select name="reaction">
         <option value="pozytywny">Pozytywny</option>
@@ -36,6 +39,7 @@
     <input type="reset"/>
     </input><br/>
 </form>
-
+</div>
+</div>
 </body>
 </html>

@@ -5,20 +5,23 @@
 
 <head>
     <title>Tworzenie bloga</title>
+    <link rel="stylesheet" title="compact" href="styl.css" type="text/css" />
 </head>
 
 <body>
-<div id="pozostale_cwiczenia">
-    Menu:
+<div class="menu">
+    <p>Menu:</p>
     <ul>
         <li><a href="createBlog.php">Nowy blog</a></li>
         <li><a href="addPost.php">Nowy wpis</a></li>
         <li><a href="blog.php">Wszystkie blogi</a></li>
     </ul>
 </div>
+<div id="main">
+    <h1 id="title">Formularz tworzenia posta</h1>
+    <div id="text">
 
-<h1 id="title">Formularz tworzenia posta</h1>
-<form action="../skrypty/wpis.php" method="post" enctype="multipart/form-data">
+<form action="../skrypty/wpis.php" method="post" enctype="multipart/form-data" target="_blank">
 	<label for="username"><b>Nazwa użytkownika</b></label><br/>
     <input type="text" placeholder="Enter Username" name="username" required="required">
 	</input><br/>
@@ -45,7 +48,8 @@
 	<input type="reset">
 	</input><br/>
 </form>
-
+    </div>
+</div>
 
 </body>
 </html>
