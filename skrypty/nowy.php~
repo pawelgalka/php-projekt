@@ -12,6 +12,7 @@
 
 
 $semafor = fopen("semafor_do_nowego_bloga", "r+");
+
 if(flock($semafor, LOCK_EX)){
 	if(!file_exists("../blogi/".$_GET["name"])){
     mkdir("../blogi/".$_GET["name"], 0777, true);
